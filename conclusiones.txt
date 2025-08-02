@@ -1,0 +1,27 @@
+CONCLUSIONES DE LA PRUEBA DE CARGA - SERVICIO DE LOGIN (FakeStoreAPI)
+
+Resumen de configuración:
+- Herramienta utilizada: Apache JMeter 5.6.3
+- Endpoint evaluado: https://fakestoreapi.com/auth/login
+- Carga de usuarios desde archivo CSV: user,passwd
+- Criterios definidos:
+    • Alcanzar mínimo 20 TPS (Transacciones por segundo)
+    • Tiempo máximo de respuesta permitido: 1.5 segundos
+    • Tasa de error máxima permitida: 3%
+
+Resultados obtenidos:
+- Total de peticiones enviadas: 671
+- Duración total de la prueba: 30.25 segundos
+- TPS alcanzado: 22.18 TPS ✅
+- Tiempo de respuesta promedio: 337.54 ms ✅
+- Tasa de error: 16.69% ❌
+
+Hallazgos:
+- El escenario cumple con el requerimiento de carga mínima (TPS ≥ 20).
+- El tiempo de respuesta está dentro del rango permitido.
+- La tasa de error fue superior al 3%, indicando que algunas peticiones fallaron (posiblemente por credenciales inválidas o mal procesadas).
+
+Recomendaciones:
+- Validar que el archivo CSV contenga solo credenciales válidas registradas en FakeStoreAPI.
+- Revisar la configuración del body en el sampler HTTP para garantizar que las variables ${user} y ${passwd} estén bien enviadas.
+- Implementar validaciones con JSON Assertion o Response Assertion para identificar respuestas exitosas (token presente) y diferenciar errores legítimos.
